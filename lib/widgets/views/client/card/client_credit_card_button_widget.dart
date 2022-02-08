@@ -1,63 +1,124 @@
+import 'package:delivery_app/providers/providers.dart' show CreditCardProvider;
 import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
+import 'package:delivery_app/utils/utils.dart';
 import 'package:flutter/material.dart'
-    show BorderRadius, BuildContext, CircularProgressIndicator, Colors, Container, EdgeInsets, ElevatedButton, Icon, Icons, Key, MainAxisAlignment, RoundedRectangleBorder, Row, SizedBox, StatelessWidget, Text, TextStyle, Widget;
+    show
+        BorderRadius,
+        BuildContext,
+        CircularProgressIndicator,
+        Colors,
+        Container,
+        EdgeInsets,
+        ElevatedButton,
+        Icon,
+        Icons,
+        Key,
+        MainAxisAlignment,
+        Navigator,
+        RoundedRectangleBorder,
+        Row,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        TextAlign,
+        TextStyle,
+        Widget;
+import 'package:provider/provider.dart' show Provider;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ClientCreditCardButtonWidget extends StatelessWidget {
   const ClientCreditCardButtonWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final CreditCardProvider _creditCardProvider =
+        Provider.of<CreditCardProvider>(context);
 
-    // Future<void> _createAddress() async {
+    Future<void> _setCard() async {
+      try {
+        if (_creditCardProvider.cardNumber == '' ||
+            _creditCardProvider.cardNumber.length < 19) {
+          throw ('El número de la tarjeta no es válido');
+        }
 
-    // }
+        final expiryDate = _creditCardProvider.expiryDate;
+        final int month = int.parse(expiryDate.split('/')[0]);
+        final int year = int.parse(expiryDate.split('/')[1]);
+        final DateTime now = DateTime.now();
+        final List yearNowArray = now.year.toString().split('');
+        final int yearNow = int.parse(yearNowArray[yearNowArray.length - 2] +
+            yearNowArray[yearNowArray.length - 1]);
+        if (_creditCardProvider.expiryDate == '' ||
+            _creditCardProvider.expiryDate.length < 5 ||
+            month < 1 ||
+            month > 12 || year < yearNow) {
+          throw ('La fecha de expiración no es válida');
+        }
 
-    // void _alert() {
-    //   Alert(
-    //     context: context,
-    //     title: "Crear dirección",
-    //     desc: "Si quieres editar tus datos cancela el registro con la X",
-    //     style: const AlertStyle(
-    //       descStyle: TextStyle(fontSize: 14),
-    //       descTextAlign: TextAlign.start,
-    //     ),
-    //     buttons: [
-    //       DialogButton(
-    //         child: const Text(
-    //           "Crear dirección",
-    //           style: TextStyle(color: Colors.white, fontSize: 20),
-    //         ),
-    //         onPressed: () async {
-    //           Navigator.pop(context);
-    //           _createAddress();
-    //         },
-    //         color: ColorTheme.primaryColor,
-    //         radius: BorderRadius.circular(50),
-    //       ),
-    //     ],
-    //   ).show();
-    // }
+        if (_creditCardProvider.expiryDate == '' ||
+            _creditCardProvider.expiryDate.length < 5) {
+          throw ('El código de seguridad no es válido');
+        }
 
+        if (_creditCardProvider.cvvCode == '' ||
+            _creditCardProvider.cvvCode.length < 3) {
+          throw ('El código de seguridad no es válido');
+        }
+
+        if (_creditCardProvider.cardHolderName == '') {
+          throw ('El nombre del titular no es válido');
+        }
+        _creditCardProvider.cardTokens();
+      } catch (e) {
+        NotificationUtil.showSnackBar(e.toString(), success: false);
+      }
+    }
+
+    void _alert() {
+      Alert(
+        context: context,
+        title: "Comprar productos",
+        desc: "Si quieres editar tus datos cancela el registro con la X",
+        style: const AlertStyle(
+          descStyle: TextStyle(fontSize: 14),
+          descTextAlign: TextAlign.start,
+        ),
+        buttons: [
+          DialogButton(
+            child: const Text(
+              "Pagar",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () async {
+              Navigator.pop(context);
+              _setCard();
+            },
+            color: ColorTheme.primaryColor,
+            radius: BorderRadius.circular(50),
+          ),
+        ],
+      ).show();
+    }
 
     return Container(
       height: 50,
       margin: const EdgeInsets.all(30),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: _alert,
         child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.arrow_forward_ios),
-                  SizedBox(width: 10),
-                  Text(
-                    'Continuar',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(Icons.arrow_forward_ios),
+            SizedBox(width: 10),
+            Text(
+              'Continuar',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
               ),
+            ),
+          ],
+        ),
         style: ElevatedButton.styleFrom(
           primary: ColorTheme.primaryColor,
           shape: RoundedRectangleBorder(
