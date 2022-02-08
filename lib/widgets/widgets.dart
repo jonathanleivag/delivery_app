@@ -5,6 +5,7 @@ export 'package:delivery_app/widgets/menu_icon_widget.dart';
 export 'package:delivery_app/widgets/no_item_widget.dart';
 export 'package:delivery_app/widgets/Progress_widget.dart';
 export 'package:delivery_app/widgets/text_field_widget.dart';
+export 'package:delivery_app/widgets/views/client/card/client_credit_card_button_widget.dart';
 export 'package:delivery_app/widgets/views/client/card/client_credit_card_form_widget.dart';
 export 'package:delivery_app/widgets/views/client/card/client_credit_card_widget.dart';
 export 'package:delivery_app/widgets/views/client/client_body_product_list_widget.dart';
@@ -22,6 +23,9 @@ export 'package:delivery_app/widgets/views/client/direction/list/client_list_dir
 export 'package:delivery_app/widgets/views/client/direction/map/client_direction_icon_my_location_widget.dart';
 export 'package:delivery_app/widgets/views/client/direction/map/client_direction_map_widget.dart';
 export 'package:delivery_app/widgets/views/client/direction/map/client_direction_name_widget.dart';
+export 'package:delivery_app/widgets/views/client/installments/client_button_installments_widget.dart';
+export 'package:delivery_app/widgets/views/client/installments/client_dropdown_installments_widget.dart';
+export 'package:delivery_app/widgets/views/client/installments/client_text_installments_widget.dart';
 export 'package:delivery_app/widgets/views/client/modal/client_button_delete_product_detail_widget.dart';
 export 'package:delivery_app/widgets/views/client/modal/client_button_product_detail_widget.dart';
 export 'package:delivery_app/widgets/views/client/modal/client_count_product_detail_widget.dart';
@@ -52,4 +56,3 @@ export 'package:delivery_app/widgets/views/login_register_views/register/form_re
 export 'package:delivery_app/widgets/views/login_register_views/register/hero_register_widget.dart';
 export 'package:delivery_app/widgets/views/role/icon_role_widget.dart';
 export 'package:delivery_app/widgets/views/role/text_widget.dart';
-export 'package:delivery_app/widgets/views/client/card/client_credit_card_button_widget.dart';

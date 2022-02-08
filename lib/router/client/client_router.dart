@@ -6,7 +6,8 @@ import 'package:delivery_app/views/views.dart'
         ClientDirectionMapView,
         ClientOrderListView,
         ClientPayCardView,
-        ClientProductListView;
+        ClientProductListView,
+        ClietPaymentsInstallmentsView;
 import 'package:flutter/material.dart' show BuildContext, Widget, WidgetBuilder;
 
 Map<String, Widget Function(BuildContext)> clientRouter =
@@ -31,5 +32,8 @@ Map<String, Widget Function(BuildContext)> clientRouter =
   },
   ClientPayCardView.routerName: (BuildContext context) {
     return const ClientPayCardView();
+  },
+  ClietPaymentsInstallmentsView.routerName: (BuildContext context) {
+    return const ClietPaymentsInstallmentsView();
   },
 };

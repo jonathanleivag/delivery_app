@@ -1,11 +1,12 @@
 import 'package:delivery_app/providers/providers.dart' show CreditCardProvider;
 import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
-import 'package:delivery_app/utils/utils.dart';
+import 'package:delivery_app/utils/utils.dart' show NotificationUtil;
+import 'package:delivery_app/views/views.dart'
+    show ClietPaymentsInstallmentsView;
 import 'package:flutter/material.dart'
     show
         BorderRadius,
         BuildContext,
-        CircularProgressIndicator,
         Colors,
         Container,
         EdgeInsets,
@@ -24,7 +25,8 @@ import 'package:flutter/material.dart'
         TextStyle,
         Widget;
 import 'package:provider/provider.dart' show Provider;
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:rflutter_alert/rflutter_alert.dart'
+    show Alert, AlertStyle, DialogButton;
 
 class ClientCreditCardButtonWidget extends StatelessWidget {
   const ClientCreditCardButtonWidget({Key? key}) : super(key: key);
@@ -37,7 +39,7 @@ class ClientCreditCardButtonWidget extends StatelessWidget {
     Future<void> _setCard() async {
       try {
         if (_creditCardProvider.cardNumber == '' ||
-            _creditCardProvider.cardNumber.length < 19) {
+            _creditCardProvider.cardNumber.length < 15) {
           throw ('El número de la tarjeta no es válido');
         }
 
@@ -51,7 +53,8 @@ class ClientCreditCardButtonWidget extends StatelessWidget {
         if (_creditCardProvider.expiryDate == '' ||
             _creditCardProvider.expiryDate.length < 5 ||
             month < 1 ||
-            month > 12 || year < yearNow) {
+            month > 12 ||
+            year < yearNow) {
           throw ('La fecha de expiración no es válida');
         }
 
@@ -69,42 +72,18 @@ class ClientCreditCardButtonWidget extends StatelessWidget {
           throw ('El nombre del titular no es válido');
         }
         _creditCardProvider.cardTokens();
+        Navigator.of(context)
+            .pushNamed(ClietPaymentsInstallmentsView.routerName);
       } catch (e) {
         NotificationUtil.showSnackBar(e.toString(), success: false);
       }
-    }
-
-    void _alert() {
-      Alert(
-        context: context,
-        title: "Comprar productos",
-        desc: "Si quieres editar tus datos cancela el registro con la X",
-        style: const AlertStyle(
-          descStyle: TextStyle(fontSize: 14),
-          descTextAlign: TextAlign.start,
-        ),
-        buttons: [
-          DialogButton(
-            child: const Text(
-              "Pagar",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            onPressed: () async {
-              Navigator.pop(context);
-              _setCard();
-            },
-            color: ColorTheme.primaryColor,
-            radius: BorderRadius.circular(50),
-          ),
-        ],
-      ).show();
     }
 
     return Container(
       height: 50,
       margin: const EdgeInsets.all(30),
       child: ElevatedButton(
-        onPressed: _alert,
+        onPressed: _setCard,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [

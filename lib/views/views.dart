@@ -1,4 +1,3 @@
-
 export 'package:delivery_app/views/check_address_view.dart';
 export 'package:delivery_app/views/check_auth_view.dart';
 export 'package:delivery_app/views/client_create_direction_list_view.dart';
@@ -6,6 +5,7 @@ export 'package:delivery_app/views/client_direction_list_view.dart';
 export 'package:delivery_app/views/client_direction_map_view.dart';
 export 'package:delivery_app/views/client_order_list_view.dart';
 export 'package:delivery_app/views/client_pay_card_view.dart';
+export 'package:delivery_app/views/client_payments_installments_view.dart';
 export 'package:delivery_app/views/client_product_list_view.dart';
 export 'package:delivery_app/views/delivery_order_list_view.dart';
 export 'package:delivery_app/views/edit_user_view.dart';
