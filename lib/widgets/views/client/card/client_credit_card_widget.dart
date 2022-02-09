@@ -61,6 +61,7 @@ class ClientCreditCardWidget extends StatelessWidget {
       animationDuration: const Duration(milliseconds: 1000),
       glassmorphismConfig: _glassmorphismConfig(),
       onCreditCardWidgetChange:
+          // ignore: non_constant_identifier_names
           (CreditCardBrand) {}, //true when you want to show cvv(back) view
     );
   }

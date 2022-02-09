@@ -1,8 +1,7 @@
 import 'package:delivery_app/providers/providers.dart' show CreditCardProvider;
 import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
 import 'package:delivery_app/utils/utils.dart' show NotificationUtil;
-import 'package:delivery_app/views/views.dart'
-    show ClietPaymentsInstallmentsView;
+import 'package:delivery_app/views/views.dart' show CheckInstallments;
 import 'package:flutter/material.dart'
     show
         BorderRadius,
@@ -21,12 +20,9 @@ import 'package:flutter/material.dart'
         SizedBox,
         StatelessWidget,
         Text,
-        TextAlign,
         TextStyle,
         Widget;
 import 'package:provider/provider.dart' show Provider;
-import 'package:rflutter_alert/rflutter_alert.dart'
-    show Alert, AlertStyle, DialogButton;
 
 class ClientCreditCardButtonWidget extends StatelessWidget {
   const ClientCreditCardButtonWidget({Key? key}) : super(key: key);
@@ -71,9 +67,8 @@ class ClientCreditCardButtonWidget extends StatelessWidget {
         if (_creditCardProvider.cardHolderName == '') {
           throw ('El nombre del titular no es válido');
         }
-        _creditCardProvider.cardTokens();
-        Navigator.of(context)
-            .pushNamed(ClietPaymentsInstallmentsView.routerName);
+        await _creditCardProvider.cardTokens();
+        Navigator.of(context).pushNamed(CheckInstallments.routerName);
       } catch (e) {
         NotificationUtil.showSnackBar(e.toString(), success: false);
       }

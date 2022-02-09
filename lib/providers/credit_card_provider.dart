@@ -69,7 +69,7 @@ class CreditCardProvider extends ChangeNotifier {
 
     final data = PublicKeyResponseModel.fromJson(res.body);
     if (data.success) {
-      _token(key: data.data!);
+    await _token(key: data.data!);
     }
   }
 
@@ -96,5 +96,23 @@ class CreditCardProvider extends ChangeNotifier {
     final CardTokensResponseModel data =
         CardTokensResponseModel.fromJson(res.body);
     _cardTokens = data;
+  }
+
+  Future<InstallmentsResponeseModel> installments ({required int amount}) async {
+    final url = Uri.parse('$_baseUrl/pay/installments');
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': await SecureStorageUtil.get('token') ?? '',
+    };
+
+ Map<String, dynamic> formData = {
+      "bin": _cardTokens!.firstSixDigits,
+      "amount": amount,
+    };
+
+    final res = await http.post(url, headers: headers, body: json.encode(formData));
+
+    final data = InstallmentsResponeseModel.fromJson(res.body);
+    return data;
   }
 }

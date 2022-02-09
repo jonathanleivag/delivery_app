@@ -16,3 +16,4 @@ export 'package:delivery_app/views/login_view.dart';
 export 'package:delivery_app/views/register_view.dart';
 export 'package:delivery_app/views/role_view.dart';
 export 'package:delivery_app/views/selected_role_view.dart';
+export 'package:delivery_app/views/check_installments_view.dart';

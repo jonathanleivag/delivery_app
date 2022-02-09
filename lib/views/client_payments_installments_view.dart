@@ -1,3 +1,4 @@
+import 'package:delivery_app/models/models.dart';
 import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
 import 'package:delivery_app/widgets/widgets.dart';
 import 'package:flutter/material.dart'
@@ -12,9 +13,12 @@ import 'package:flutter/material.dart'
         Widget;
 
 class ClietPaymentsInstallmentsView extends StatelessWidget {
-  const ClietPaymentsInstallmentsView({Key? key}) : super(key: key);
+  const ClietPaymentsInstallmentsView(
+      {Key? key, required this.dataInstallments})
+      : super(key: key);
 
   static const String routerName = '/client/payments/installments';
+  final DataInstallments dataInstallments;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +28,11 @@ class ClietPaymentsInstallmentsView extends StatelessWidget {
         backgroundColor: ColorTheme.primaryColor,
       ),
       body: Column(
-        children: const [
-          ClientTextInstallmentsWidget(),
-          ClientDropdownInstallmentsWidget(),
+        children: [
+          const ClientTextInstallmentsWidget(),
+          ClientDropdownInstallmentsWidget(
+            payCost: dataInstallments.payerCosts!,
+          ),
         ],
       ),
       bottomSheet: const ClientOrderTotalListWidget(),
