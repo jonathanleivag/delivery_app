@@ -92,6 +92,7 @@ class CreditCardProvider extends ChangeNotifier {
   }
 
   Future<void> cardTokens() async {
+    isLoading = true;
     final url = Uri.parse('$_baseUrl/pay/public-key');
     Map<String, String> headers = {
       'Content-Type': 'application/json',
@@ -106,7 +107,6 @@ class CreditCardProvider extends ChangeNotifier {
   }
 
   Future<void> _token({required String key}) async {
-    isLoading = true;
     final url =
         Uri.parse('https://api.mercadopago.com/v1/card_tokens?public_key=$key');
 

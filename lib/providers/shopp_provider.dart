@@ -365,7 +365,7 @@ class ShoppProvider extends ChangeNotifier {
       final data = AddressGetResponseModel.fromJson(res.body);
       if (data.success) {
         addresses.addAll(data.data);
-        fristAddress = addresses.first;
+        if (addresses.isNotEmpty) fristAddress = addresses.first;
       } else {
         addresses.clear();
         fristAddress = null;

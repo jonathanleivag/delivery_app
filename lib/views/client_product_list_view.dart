@@ -10,7 +10,27 @@ import 'package:delivery_app/widgets/widgets.dart'
         MenuIconWidget,
         Progress;
 import 'package:flutter/material.dart'
-    show AppBar, AsyncSnapshot, BuildContext, Colors, Column, Container, DefaultTabController, EdgeInsets, FutureBuilder, Icon, Icons, Key, ListTile, Padding, PreferredSize, Scaffold, Size, StatelessWidget, Text, Widget;
+    show
+        AppBar,
+        AsyncSnapshot,
+        BuildContext,
+        Colors,
+        Column,
+        Container,
+        DefaultTabController,
+        EdgeInsets,
+        FutureBuilder,
+        Icon,
+        Icons,
+        Key,
+        ListTile,
+        Padding,
+        PreferredSize,
+        Scaffold,
+        Size,
+        StatelessWidget,
+        Text,
+        Widget;
 import 'package:provider/provider.dart' show Provider;
 
 class ClientProductListView extends StatelessWidget {
@@ -69,7 +89,8 @@ class ClientProductListView extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: ClientTabBarProductListWidget(
-                              categories: categories),
+                            categories: categories,
+                          ),
                         )
                       ],
                     ),

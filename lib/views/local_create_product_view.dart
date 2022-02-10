@@ -1,4 +1,5 @@
-import 'package:delivery_app/providers/providers.dart' show ProductProvider;
+import 'package:delivery_app/providers/providers.dart'
+    show ProductProvider;
 import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
 import 'package:delivery_app/utils/utils.dart';
 import 'package:delivery_app/widgets/widgets.dart'
@@ -77,6 +78,7 @@ class LocalCreateProductView extends StatelessWidget {
                     throw ('Debe seleccionar una categoria');
                   }
                   final data = await _productProvider.onSubmit();
+                  _productProvider.resetProductByCategory();
                   if (!data.success) {
                     throw (data.message!);
                   } else {

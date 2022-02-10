@@ -67,4 +67,9 @@ class CategoryProvider extends ChangeNotifier {
     }
     return categories;
   }
+
+  void resetCategory() {
+    categories = {'categories': []};
+    notifyListeners();
+  }
 }

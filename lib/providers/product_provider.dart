@@ -100,6 +100,11 @@ class ProductProvider extends ChangeNotifier {
     return _productsByCategory[category]!;
   }
 
+  void resetProductByCategory () {
+    _productsByCategory.clear();
+    notifyListeners();
+  }
+
   Future<ProductResponseModel> onSubmit() async {
     _isLoading = true;
     notifyListeners();

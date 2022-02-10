@@ -70,7 +70,7 @@ class LocalCreateCategoryView extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 final CategoryResponseModel data =
                     await _categoryProvider.createCategory();
-
+                _categoryProvider.resetCategory();
                 if (!data.success) {
                   NotificationUtil.showSnackBar(data.message!,
                       success: data.success);
