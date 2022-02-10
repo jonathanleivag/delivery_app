@@ -3,7 +3,33 @@ import 'package:delivery_app/providers/credit_card_provider.dart'
 import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
 import 'package:delivery_app/views/views.dart';
 import 'package:flutter/material.dart'
-    show BorderRadius, BoxFit, BuildContext, ClipPath, Colors, Column, Container, EdgeInsets, ElevatedButton, FontWeight, Icon, Icons, Key, MainAxisAlignment, Navigator, RoundedRectangleBorder, Row, SafeArea, Scaffold, SingleChildScrollView, SizedBox, StatelessWidget, Text, TextAlign, TextStyle, Widget;
+    show
+        BorderRadius,
+        BoxFit,
+        BuildContext,
+        ClipPath,
+        Colors,
+        Column,
+        Container,
+        EdgeInsets,
+        ElevatedButton,
+        FontWeight,
+        Icon,
+        Icons,
+        Key,
+        MainAxisAlignment,
+        Navigator,
+        RoundedRectangleBorder,
+        Row,
+        SafeArea,
+        Scaffold,
+        SingleChildScrollView,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        TextAlign,
+        TextStyle,
+        Widget;
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart'
     show OvalBottomBorderClipper;
 import 'package:lottie/lottie.dart' show Lottie;

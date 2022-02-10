@@ -8,6 +8,7 @@ import 'package:delivery_app/widgets/widgets.dart'
         ClientTabBarProductListWidget,
         DrawerWidget,
         MenuIconWidget,
+        NoItemWidget,
         Progress;
 import 'package:flutter/material.dart'
     show
@@ -99,7 +100,11 @@ class ClientProductListView extends StatelessWidget {
               ),
               drawer: _drawer(),
               key: _menuProvider.scaffoldKey,
-              body: ClientBodyProductListWidget(categories: categories),
+              body: categories.isNotEmpty
+                  ? ClientBodyProductListWidget(categories: categories)
+                  : const NoItemWidget(
+                      text: 'No hay producto para mostrar',
+                    ),
             ),
           );
         }
