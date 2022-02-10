@@ -1,10 +1,31 @@
-import 'package:delivery_app/models/models.dart';
-import 'package:delivery_app/providers/providers.dart';
-import 'package:delivery_app/theme/color_theme.dart';
-import 'package:delivery_app/views/views.dart';
-import 'package:delivery_app/widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:delivery_app/models/models.dart' show DataAddress;
+import 'package:delivery_app/providers/providers.dart' show ShoppProvider;
+import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
+import 'package:delivery_app/views/views.dart' show ClientOrderListView;
+import 'package:delivery_app/widgets/widgets.dart'
+    show
+        ClientDirecitionButtonAcceptAddressWidget,
+        ClientDirectionAddAddressWidget,
+        ClientDirectionTitleAddressWidget,
+        ClientListDirectionRadioWidget,
+        NoItemWidget;
+import 'package:flutter/material.dart'
+    show
+        AppBar,
+        AsyncSnapshot,
+        BuildContext,
+        Column,
+        FutureBuilder,
+        Icon,
+        IconButton,
+        Icons,
+        Key,
+        Navigator,
+        Scaffold,
+        StatelessWidget,
+        Text,
+        Widget;
+import 'package:provider/provider.dart' show Provider;
 
 class ClientDirectionListView extends StatelessWidget {
   const ClientDirectionListView({Key? key}) : super(key: key);

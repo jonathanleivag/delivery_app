@@ -1,22 +1,21 @@
 import 'package:delivery_app/providers/providers.dart' show MenuProvider;
-import 'package:delivery_app/utils/utils.dart' show SecureStorageUtil;
-import 'package:delivery_app/views/views.dart'
-    show LocalCreateCategoryView, LocalCreateProductView;
 import 'package:delivery_app/widgets/widgets.dart'
-    show DrawerWidget, MenuIconWidget;
+    show DrawerWidget, LocalTabBarProductListWidget, MenuIconWidget;
 import 'package:flutter/material.dart'
     show
         AppBar,
         BuildContext,
-        Center,
-        Icon,
-        IconButton,
-        Icons,
+        Colors,
+        Container,
+        DefaultTabController,
+        EdgeInsets,
         Key,
-        ListTile,
-        Navigator,
+        Padding,
+        PreferredSize,
         Scaffold,
+        Size,
         StatelessWidget,
+        TabBarView,
         Text,
         Widget;
 import 'package:provider/provider.dart' show Provider;
@@ -30,37 +29,44 @@ class LocalOrderListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final MenuProvider _menuProvider = Provider.of<MenuProvider>(context);
 
-    logout() {
-      SecureStorageUtil.logout(context);
-    }
+    const List<Map<String, String>> states = [
+      {'label': 'Pendiente', 'value': 'pending'},
+      {'label': 'Aceptado', 'value': 'accepted'},
+      {'label': 'Rechazado', 'value': 'rejected'},
+      {'label': 'Enviado', 'value': 'dispatched'},
+      {'label': 'Recibió', 'value': 'received'},
+    ];
 
-    return Scaffold(
-      key: _menuProvider.scaffoldKey,
-      appBar: AppBar(
-        leading: const MenuIconWidget(),
-      ),
-      drawer: DrawerWidget(menu: [
-        ListTile(
-          title: const Text('Crear categoría'),
-          trailing: const Icon(Icons.list_alt),
-          onTap: () {
-            Navigator.of(context).pop();
-            Navigator.of(context).pushNamed(LocalCreateCategoryView.routerName);
-          },
-        ),
-        ListTile(
-          title: const Text('Crear producto'),
-          trailing: const Icon(Icons.local_pizza),
-          onTap: () {
-            Navigator.of(context).pop();
-            Navigator.of(context).pushNamed(LocalCreateProductView.routerName);
-          },
-        ),
-      ]),
-      body: Center(
-        child: IconButton(
-          onPressed: logout,
-          icon: const Icon(Icons.exit_to_app),
+    return DefaultTabController(
+      length: states.length,
+      child: Scaffold(
+        key: _menuProvider.scaffoldKey,
+        appBar: AppBar(
+            leading: const MenuIconWidget(),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(100),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.only(bottom: 5),
+                  child: LocalTabBarProductListWidget(
+                    states: states,
+                  ),
+                ),
+              ),
+            )),
+        drawer: const DrawerWidget(menu: []),
+        body: TabBarView(
+          children: states.map(
+            (Map<String, String> state) {
+              return Text(state['value']!);
+            },
+          ).toList(),
         ),
       ),
     );

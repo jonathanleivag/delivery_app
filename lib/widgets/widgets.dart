@@ -47,6 +47,7 @@ export 'package:delivery_app/widgets/views/edit_user/hero_edit_user_view.dart';
 export 'package:delivery_app/widgets/views/local/create/card_image_create_product_widget.dart';
 export 'package:delivery_app/widgets/views/local/create/form_create_product_widget.dart';
 export 'package:delivery_app/widgets/views/local/create/select_category_create_product_widget.dart';
+export 'package:delivery_app/widgets/views/local/local_tab_bar_product_list_widget.dart';
 export 'package:delivery_app/widgets/views/login_register_views/action_register_or_login_widget.dart';
 export 'package:delivery_app/widgets/views/login_register_views/base/base_view.dart';
 export 'package:delivery_app/widgets/views/login_register_views/base/title_circle_widget.dart';
