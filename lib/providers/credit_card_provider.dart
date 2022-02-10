@@ -1,6 +1,11 @@
-import 'dart:convert';
+import 'dart:convert' show json;
 
-import 'package:delivery_app/models/models.dart';
+import 'package:delivery_app/models/models.dart'
+    show
+        CardTokensResponseModel,
+        InstallmentsResponeseModel,
+        PaymentCreditCard,
+        PublicKeyResponseModel;
 import 'package:delivery_app/utils/utils.dart' show EnvUtil, SecureStorageUtil;
 import 'package:flutter/material.dart'
     show ChangeNotifier, FormState, GlobalKey;
@@ -13,9 +18,25 @@ class CreditCardProvider extends ChangeNotifier {
   String _cvvCode = '';
   String _cardType = '';
   bool _showBackView = false;
+  int _installmentsUserCard = 1;
+  String? paymentMethodId;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final String _baseUrl = EnvUtil.uriApi;
-  CardTokensResponseModel? _cardTokens;
+  CardTokensResponseModel? cardTokens0;
+  bool _isLoading = false;
+
+  set installmentsUserCard(int value) {
+    _installmentsUserCard = value;
+    notifyListeners();
+  }
+
+  set isLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
+
+  bool get isLoading => _isLoading;
+
 
   bool get showBackView => _showBackView;
 
@@ -59,6 +80,17 @@ class CreditCardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetForm() {
+    _cardNumber = '';
+    _cardHolderName = '';
+    _expiryDate = '';
+    _cvvCode = '';
+    _cardType = '';
+    _installmentsUserCard = 1;
+    paymentMethodId = null;
+    notifyListeners();
+  }
+
   Future<void> cardTokens() async {
     final url = Uri.parse('$_baseUrl/pay/public-key');
     Map<String, String> headers = {
@@ -69,11 +101,12 @@ class CreditCardProvider extends ChangeNotifier {
 
     final data = PublicKeyResponseModel.fromJson(res.body);
     if (data.success) {
-    await _token(key: data.data!);
+      await _token(key: data.data!);
     }
   }
 
   Future<void> _token({required String key}) async {
+    isLoading = true;
     final url =
         Uri.parse('https://api.mercadopago.com/v1/card_tokens?public_key=$key');
 
@@ -95,24 +128,47 @@ class CreditCardProvider extends ChangeNotifier {
 
     final CardTokensResponseModel data =
         CardTokensResponseModel.fromJson(res.body);
-    _cardTokens = data;
+    cardTokens0 = data;
+    isLoading = false;
   }
 
-  Future<InstallmentsResponeseModel> installments ({required int amount}) async {
+  Future<InstallmentsResponeseModel> installments({required int amount}) async {
     final url = Uri.parse('$_baseUrl/pay/installments');
     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Authorization': await SecureStorageUtil.get('token') ?? '',
     };
 
- Map<String, dynamic> formData = {
-      "bin": _cardTokens!.firstSixDigits,
+    Map<String, dynamic> formData = {
+      "bin": cardTokens0!.firstSixDigits,
       "amount": amount,
     };
 
-    final res = await http.post(url, headers: headers, body: json.encode(formData));
+    final res =
+        await http.post(url, headers: headers, body: json.encode(formData));
 
     final data = InstallmentsResponeseModel.fromJson(res.body);
     return data;
+  }
+
+  Future<PaymentCreditCard> paymentCreditCard({required int amount}) async {
+    isLoading = true;
+    final url = Uri.parse('$_baseUrl/pay/payment-credit-card');
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': await SecureStorageUtil.get('token') ?? '',
+    };
+
+    Map<String, dynamic> formData = {
+      "token": cardTokens0!.id,
+      "transactionAmount": amount,
+      "installments": _installmentsUserCard,
+      "paymentMethodId": paymentMethodId,
+    };
+
+    final res =
+        await http.post(url, headers: headers, body: json.encode(formData));
+    isLoading = false;
+    return PaymentCreditCard.fromJson(res.body);
   }
 }

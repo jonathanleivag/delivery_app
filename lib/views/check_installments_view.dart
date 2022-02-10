@@ -3,7 +3,7 @@ import 'package:delivery_app/models/models.dart'
 import 'package:delivery_app/providers/providers.dart'
     show CreditCardProvider, ShoppProvider;
 import 'package:delivery_app/views/views.dart'
-    show ClietPaymentsInstallmentsView;
+    show ClientOrderSummaryView, ClietPaymentsInstallmentsView;
 import 'package:delivery_app/widgets/widgets.dart' show Progress;
 import 'package:flutter/material.dart'
     show
@@ -33,10 +33,18 @@ class CheckInstallments extends StatelessWidget {
         Widget data = const Progress();
         if (!snapshot.hasData) data = const Progress();
 
-        if (snapshot.data != null) {
+        if (snapshot.data != null && snapshot.data!.success) {
           final DataInstallments dataInstallments = snapshot.data!.data!;
+          _creditCardProvider.paymentMethodId =
+              dataInstallments.paymentMethodId;
           data = ClietPaymentsInstallmentsView(
             dataInstallments: dataInstallments,
+          );
+        }
+
+        if (snapshot.data != null && !snapshot.data!.success) {
+          data = const ClientOrderSummaryView(
+            isError: true,
           );
         }
 

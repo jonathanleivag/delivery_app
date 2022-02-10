@@ -6,6 +6,7 @@ import 'package:flutter/material.dart'
     show
         BorderRadius,
         BuildContext,
+        CircularProgressIndicator,
         Colors,
         Container,
         EdgeInsets,
@@ -18,11 +19,13 @@ import 'package:flutter/material.dart'
         RoundedRectangleBorder,
         Row,
         SizedBox,
+        TextAlign,
         StatelessWidget,
         Text,
         TextStyle,
         Widget;
 import 'package:provider/provider.dart' show Provider;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ClientCreditCardButtonWidget extends StatelessWidget {
   const ClientCreditCardButtonWidget({Key? key}) : super(key: key);
@@ -74,19 +77,53 @@ class ClientCreditCardButtonWidget extends StatelessWidget {
       }
     }
 
+    Future<void> _alert() async {
+      Alert(
+        context: context,
+        title: "¿ Usar esta tarjeta ?",
+        desc: "Si quieres editar tus datos cancela el registro con la X",
+        style: const AlertStyle(
+          descStyle: TextStyle(fontSize: 14),
+          descTextAlign: TextAlign.start,
+        ),
+        buttons: [
+          DialogButton(
+            child: const Text(
+              "Continuar",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () async {
+              Navigator.pop(context);
+              _setCard();
+            },
+            color: ColorTheme.primaryColor,
+            radius: BorderRadius.circular(50),
+          ),
+        ],
+      ).show();
+    }
+
     return Container(
       height: 50,
       margin: const EdgeInsets.all(30),
       child: ElevatedButton(
-        onPressed: _setCard,
+        onPressed: _creditCardProvider.isLoading ? null : _alert,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(Icons.arrow_forward_ios),
-            SizedBox(width: 10),
+          children: [
+            _creditCardProvider.isLoading
+                ? SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      color: ColorTheme.primaryColor,
+                    ),
+                  )
+                : const Icon(Icons.arrow_forward_ios),
+            const SizedBox(width: 10),
             Text(
-              'Continuar',
-              style: TextStyle(
+              _creditCardProvider.isLoading ? 'Cargando...' : 'Continuar',
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 20,
               ),

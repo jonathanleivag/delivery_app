@@ -6,6 +6,7 @@ import 'package:delivery_app/views/views.dart'
         ClientDirectionListView,
         ClientDirectionMapView,
         ClientOrderListView,
+        ClientOrderSummaryView,
         ClientPayCardView,
         ClientProductListView;
 import 'package:flutter/material.dart' show BuildContext, Widget, WidgetBuilder;
@@ -35,5 +36,13 @@ Map<String, Widget Function(BuildContext)> clientRouter =
   },
   CheckInstallments.routerName: (BuildContext context) {
     return const CheckInstallments();
-  }
+  },
+  ClientOrderSummaryView.routerName: (BuildContext context) {
+    return const ClientOrderSummaryView();
+  },
+  ClientOrderSummaryView.routerNameError: (BuildContext context) {
+    return const ClientOrderSummaryView(
+      isError: true,
+    );
+  },
 };

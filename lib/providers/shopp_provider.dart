@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert' show json;
 
 import 'package:delivery_app/models/models.dart'
@@ -40,6 +39,29 @@ class ShoppProvider extends ChangeNotifier {
     'barrioForm': '',
     'directionForm': '',
   };
+
+  void reset() {
+    _product = null;
+    _price = null;
+    _total = 0;
+    _count = 1;
+    _isLoading = false;
+    _shopp.clear();
+    orders.clear();
+    isUpdateOrder = false;
+    totalOrder = 0;
+    _placemarksCopy = {
+      'barrioForm': '',
+      'directionForm': '',
+    };
+    _placemarks = {
+      'barrioForm': '',
+      'directionForm': '',
+    };
+    fristAddress = null;
+    addresses.clear();
+    notifyListeners();
+  }
 
   bool get isLoading => _isLoading;
 

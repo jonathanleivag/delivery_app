@@ -2,6 +2,7 @@ import 'package:cool_dropdown/cool_dropdown.dart' show CoolDropdown;
 import 'package:delivery_app/helpers/dropdown_item_list.dart'
     show DropdownItemList;
 import 'package:delivery_app/models/models.dart' show PayerCost;
+import 'package:delivery_app/providers/providers.dart';
 import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
 import 'package:flutter/material.dart'
     show
@@ -18,6 +19,7 @@ import 'package:flutter/material.dart'
         StatelessWidget,
         TextStyle,
         Widget;
+import 'package:provider/provider.dart' show Provider;
 
 class ClientDropdownInstallmentsWidget extends StatelessWidget {
   const ClientDropdownInstallmentsWidget({
@@ -30,6 +32,8 @@ class ClientDropdownInstallmentsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cost = DropdownItemList(payerCosts: payCost).listCost();
+    final CreditCardProvider _creditCardProvider =
+        Provider.of<CreditCardProvider>(context, listen: false);
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -46,7 +50,10 @@ class ClientDropdownInstallmentsWidget extends StatelessWidget {
           dropdownList: cost,
           resultWidth: MediaQuery.of(context).size.width,
           dropdownWidth: MediaQuery.of(context).size.width * 0.75,
-          onChange: (_) {},
+          onChange: (value) {
+            final int installmentsUserCard = int.parse(value['value']);
+            _creditCardProvider.installmentsUserCard = installmentsUserCard;
+          },
           placeholder: 'No hay cuotas',
           placeholderTS: TextStyle(
             color: ColorTheme.primaryColor,

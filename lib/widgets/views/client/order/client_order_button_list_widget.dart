@@ -36,37 +36,6 @@ class ClientOrderButtonListWidget extends StatelessWidget {
     final bool isUpdateOrder = _shoppProvider.isUpdateOrder;
 
     Future<void> _onPressed() async {
-      // TODO Add a button to confirm the order
-
-/*
-Alert(
-        context: context,
-        title: "Confirmar orden",
-        desc: "Si quieres editar tus datos cancela el registro con la X",
-        style: const AlertStyle(
-          descStyle: TextStyle(fontSize: 14),
-          descTextAlign: TextAlign.start,
-        ),
-        buttons: [
-          DialogButton(
-            child: const Text(
-              "Confirmar orden",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            onPressed: () async {
-              Navigator.pop(context);
-              final ShoppResponseModel data =
-                  await _shoppProvider.updateProductAll();
-              NotificationUtil.showSnackBar(data.message!,
-                  success: data.success);
-            },
-            color: ColorTheme.primaryColor,
-            radius: BorderRadius.circular(50),
-          ),
-        ],
-      ).show();
- */
-
       if (isUpdateOrder) {
         await _shoppProvider.updateProductAll();
       }

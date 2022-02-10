@@ -20,7 +20,7 @@ import 'package:flutter/material.dart'
 
 class ClientShoppingBagProductListWidget extends StatelessWidget {
   const ClientShoppingBagProductListWidget({Key? key}) : super(key: key);
-
+// TODO: ver el tema que se duplica los productos en la bolsa al entrar antrs que se cargue los producto
   @override
   Widget build(BuildContext context) {
     return Stack(
