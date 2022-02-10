@@ -42,31 +42,34 @@ class LocalOrderListView extends StatelessWidget {
       child: Scaffold(
         key: _menuProvider.scaffoldKey,
         appBar: AppBar(
-            leading: const MenuIconWidget(),
-            backgroundColor: Colors.white,
-            elevation: 0,
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(100),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.only(bottom: 5),
-                  child: LocalTabBarProductListWidget(
-                    states: states,
-                  ),
-                ),
-              ),
-            )),
+          leading: const MenuIconWidget(),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          bottom: _listState(states),
+        ),
         drawer: const DrawerWidget(menu: []),
         body: TabBarView(
-          children: states.map(
-            (Map<String, String> state) {
-              return Text(state['value']!);
-            },
-          ).toList(),
+          children: states
+              .map((Map<String, String> state) => Text(state['value']!))
+              .toList(),
+        ),
+      ),
+    );
+  }
+
+  PreferredSize _listState(List<Map<String, String>> states) {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(100),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 10,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 5),
+          child: LocalTabBarProductListWidget(
+            states: states,
+          ),
         ),
       ),
     );
