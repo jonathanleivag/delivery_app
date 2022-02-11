@@ -1,4 +1,5 @@
 import 'package:delivery_app/providers/providers.dart' show MenuProvider;
+import 'package:delivery_app/views/views.dart';
 import 'package:delivery_app/widgets/widgets.dart'
     show DrawerWidget, LocalTabBarProductListWidget, MenuIconWidget;
 import 'package:flutter/material.dart'
@@ -9,7 +10,11 @@ import 'package:flutter/material.dart'
         Container,
         DefaultTabController,
         EdgeInsets,
+        Icon,
+        Icons,
         Key,
+        ListTile,
+        Navigator,
         Padding,
         PreferredSize,
         Scaffold,
@@ -47,7 +52,28 @@ class LocalOrderListView extends StatelessWidget {
           elevation: 0,
           bottom: _listState(states),
         ),
-        drawer: const DrawerWidget(menu: []),
+        drawer: DrawerWidget(menu: [
+          ListTile(
+            title: const Text('Crear categoría'),
+            trailing: const Icon(Icons.list_alt),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(
+                LocalCreateCategoryView.routerName,
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Crear producto'),
+            trailing: const Icon(Icons.local_pizza),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(
+                LocalCreateProductView.routerName,
+              );
+            },
+          ),
+        ]),
         body: TabBarView(
           children: states
               .map((Map<String, String> state) => Text(state['value']!))
