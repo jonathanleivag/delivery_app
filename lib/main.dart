@@ -1,12 +1,5 @@
 import 'package:delivery_app/providers/providers.dart'
-    show
-        CategoryProvider,
-        CreditCardProvider,
-        MenuProvider,
-        ProductProvider,
-        ProfileProvider,
-        RegisterProvider,
-        ShoppProvider;
+    show CategoryProvider, CreditCardProvider, LocalShoppProvider, MenuProvider, ProductProvider, ProfileProvider, RegisterProvider, ShoppProvider;
 import 'package:delivery_app/router/router.dart' show Routes;
 import 'package:delivery_app/theme/theme.dart' show MyThemeTheme;
 import 'package:delivery_app/utils/utils.dart' show NotificationUtil;
@@ -37,6 +30,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(create: (context) => ShoppProvider()),
         ChangeNotifierProvider(create: (context) => CreditCardProvider()),
+        ChangeNotifierProvider(create: (context) => LocalShoppProvider()),
       ],
       child: const MyApp(),
     ),

@@ -226,7 +226,7 @@ class UserShopp {
     required this.name,
     required this.lastName,
     required this.phone,
-    required this.image,
+    this.image,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -236,7 +236,7 @@ class UserShopp {
   String name;
   String lastName;
   String phone;
-  String image;
+  String? image;
   DateTime createdAt;
   DateTime updatedAt;
 
