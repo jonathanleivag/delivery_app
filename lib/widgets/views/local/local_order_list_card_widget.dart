@@ -9,6 +9,8 @@ import 'package:flutter/material.dart'
         BoxDecoration,
         BuildContext,
         Card,
+        Center,
+        CircularProgressIndicator,
         Colors,
         Column,
         Container,
@@ -64,8 +66,18 @@ class _Card extends StatelessWidget {
     return FutureBuilder(
       future: _localShoppProvider.getUserShopp(purchaseId: purchaseId),
       builder: (context, AsyncSnapshot<DataUserShopp> snapshot) {
-        Widget data = Container();
-        if (!snapshot.hasData) data = Container();
+        Widget data = Center(
+          child: CircularProgressIndicator(
+            color: ColorTheme.primaryColor,
+          ),
+        );
+        if (!snapshot.hasData) {
+          data = Center(
+            child: CircularProgressIndicator(
+              color: ColorTheme.primaryColor,
+            ),
+          );
+        }
 
         if (snapshot.data != null) {
           data = Card(
