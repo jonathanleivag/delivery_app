@@ -1,7 +1,30 @@
-import 'package:delivery_app/providers/providers.dart';
-import 'package:delivery_app/widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:delivery_app/providers/providers.dart' show LocalShoppProvider;
+import 'package:delivery_app/widgets/widgets.dart'
+    show
+        LocalOrderListCardWidget,
+        LocalOrderListTabBarViewWidget,
+        NoItemWidget,
+        Progress;
+import 'package:flutter/material.dart'
+    show
+        AsyncSnapshot,
+        BuildContext,
+        Colors,
+        Column,
+        Container,
+        EdgeInsets,
+        Expanded,
+        FontWeight,
+        FutureBuilder,
+        Key,
+        ListTile,
+        ListView,
+        StatelessWidget,
+        TabBarView,
+        Text,
+        TextStyle,
+        Widget;
+import 'package:provider/provider.dart' show Provider;
 
 class LocalOrderListTabBarViewWidget extends StatelessWidget {
   const LocalOrderListTabBarViewWidget({

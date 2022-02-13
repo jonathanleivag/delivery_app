@@ -1,8 +1,30 @@
-import 'package:delivery_app/models/models.dart';
-import 'package:delivery_app/providers/providers.dart';
-import 'package:delivery_app/theme/color_theme.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:delivery_app/models/models.dart' show DataUserShopp;
+import 'package:delivery_app/providers/providers.dart' show LocalShoppProvider;
+import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
+import 'package:flutter/material.dart'
+    show
+        Alignment,
+        AsyncSnapshot,
+        BorderRadius,
+        BoxDecoration,
+        BuildContext,
+        Card,
+        Colors,
+        Column,
+        Container,
+        EdgeInsets,
+        FutureBuilder,
+        Key,
+        MediaQuery,
+        Positioned,
+        Radius,
+        RoundedRectangleBorder,
+        Stack,
+        StatelessWidget,
+        Text,
+        TextStyle,
+        Widget;
+import 'package:provider/provider.dart' show Provider;
 
 class LocalOrderListCardWidget extends StatelessWidget {
   const LocalOrderListCardWidget({

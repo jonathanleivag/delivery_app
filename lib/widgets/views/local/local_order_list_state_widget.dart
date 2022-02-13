@@ -1,7 +1,20 @@
-import 'package:delivery_app/widgets/widgets.dart';
-import 'package:flutter/material.dart';
+import 'package:delivery_app/widgets/widgets.dart'
+    show LocalTabBarProductListWidget;
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        Container,
+        EdgeInsets,
+        Key,
+        Padding,
+        PreferredSize,
+        PreferredSizeWidget,
+        Size,
+        StatelessWidget,
+        Widget;
 
-class LocalOrderListStateWidget extends StatelessWidget implements PreferredSizeWidget {
+class LocalOrderListStateWidget extends StatelessWidget
+    implements PreferredSizeWidget {
   const LocalOrderListStateWidget({
     Key? key,
     required this.states,
