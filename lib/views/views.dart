@@ -13,6 +13,7 @@ export 'package:delivery_app/views/delivery_order_list_view.dart';
 export 'package:delivery_app/views/edit_user_view.dart';
 export 'package:delivery_app/views/local_create_category_view.dart';
 export 'package:delivery_app/views/local_create_product_view.dart';
+export 'package:delivery_app/views/local_order_detail_view.dart';
 export 'package:delivery_app/views/local_order_list_view.dart';
 export 'package:delivery_app/views/login_view.dart';
 export 'package:delivery_app/views/register_view.dart';

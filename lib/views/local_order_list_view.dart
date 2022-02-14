@@ -1,5 +1,5 @@
 import 'package:delivery_app/providers/providers.dart' show MenuProvider;
-import 'package:delivery_app/views/views.dart' show LocalCreateCategoryView, LocalCreateProductView, LocalOrderListView;
+import 'package:delivery_app/views/views.dart' show LocalCreateCategoryView, LocalCreateProductView;
 import 'package:delivery_app/widgets/widgets.dart'
     show
         DrawerWidget,

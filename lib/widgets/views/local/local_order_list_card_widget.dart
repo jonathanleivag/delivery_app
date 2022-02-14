@@ -1,6 +1,7 @@
 import 'package:delivery_app/models/models.dart' show DataUserShopp;
 import 'package:delivery_app/providers/providers.dart' show LocalShoppProvider;
 import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
+import 'package:delivery_app/views/views.dart';
 import 'package:flutter/material.dart'
     show
         Alignment,
@@ -16,8 +17,10 @@ import 'package:flutter/material.dart'
         Container,
         EdgeInsets,
         FutureBuilder,
+        GestureDetector,
         Key,
         MediaQuery,
+        Navigator,
         Positioned,
         Radius,
         RoundedRectangleBorder,
@@ -32,20 +35,35 @@ class LocalOrderListCardWidget extends StatelessWidget {
   const LocalOrderListCardWidget({
     Key? key,
     required this.purchaseId,
+    required this.state,
   }) : super(key: key);
 
   final String purchaseId;
+  final String state;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 8,
-      ),
-      height: 175,
-      child: _Card(
-        purchaseId: purchaseId,
+    final LocalShoppProvider _localShoppProvider =
+        Provider.of<LocalShoppProvider>(context);
+
+    void _onTap() {
+      if (state == 'pending') {
+        _localShoppProvider.purchaseId = purchaseId;
+        Navigator.pushNamed(context, LocalOrderDatailView.routerName);
+      }
+    }
+
+    return GestureDetector(
+      onTap: _onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 8,
+        ),
+        height: 175,
+        child: _Card(
+          purchaseId: purchaseId,
+        ),
       ),
     );
   }

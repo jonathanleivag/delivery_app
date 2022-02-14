@@ -26,7 +26,7 @@ class LocalPurchaseIdResponse {
       LocalPurchaseIdResponse(
         message: json["message"],
         success: json["success"],
-        data: List<String>.from(json["data"].map((x) => x)),
+        data: json["data"] != null ? List<String>.from(json["data"].map((x) => x)):null,
         token: json["token"],
       );
 

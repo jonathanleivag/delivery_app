@@ -1,5 +1,9 @@
 import 'package:delivery_app/views/views.dart'
-    show LocalOrderListView, LocalCreateCategoryView, LocalCreateProductView;
+    show
+        LocalCreateCategoryView,
+        LocalCreateProductView,
+        LocalOrderDatailView,
+        LocalOrderListView;
 import 'package:flutter/material.dart' show BuildContext, Widget, WidgetBuilder;
 
 Map<String, Widget Function(BuildContext)> localRouter =
@@ -10,4 +14,6 @@ Map<String, Widget Function(BuildContext)> localRouter =
       const LocalCreateCategoryView(),
   LocalCreateProductView.routerName: (BuildContext context) =>
       const LocalCreateProductView(),
+  LocalOrderDatailView.routerName: (BuildContext context) =>
+      const LocalOrderDatailView(),
 };

@@ -1,10 +1,6 @@
 import 'package:delivery_app/providers/providers.dart' show LocalShoppProvider;
 import 'package:delivery_app/widgets/widgets.dart'
-    show
-        LocalOrderListCardWidget,
-        LocalOrderListTabBarViewWidget,
-        NoItemWidget,
-        Progress;
+    show LocalOrderListCardWidget, NoItemWidget, Progress;
 import 'package:flutter/material.dart'
     show
         AsyncSnapshot,
@@ -59,6 +55,7 @@ class LocalOrderListTabBarViewWidget extends StatelessWidget {
                     ),
                     _Card(
                       data: snapshot.data!,
+                      state: state['value']!,
                     ),
                   ],
                 );
@@ -77,9 +74,11 @@ class _Card extends StatelessWidget {
   const _Card({
     Key? key,
     required this.data,
+    required this.state,
   }) : super(key: key);
 
   final List<String> data;
+  final String state;
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +98,7 @@ class _Card extends StatelessWidget {
             ),
             subtitle: LocalOrderListCardWidget(
               purchaseId: data[index],
+              state: state
             ),
           );
         },
