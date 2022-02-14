@@ -42,7 +42,7 @@ class LocalOrderDatailView extends StatelessWidget {
           final products = snapshot.data!;
           data = Scaffold(
             appBar: AppBar(
-              title: Text('#${products[0].norder}'),
+              title: Text('Orden #${products[0].norder}'),
               backgroundColor: ColorTheme.primaryColor,
             ),
             body: ListView.builder(
