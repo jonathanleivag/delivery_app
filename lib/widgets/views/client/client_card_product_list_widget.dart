@@ -112,7 +112,9 @@ class _ClientCardProductListWidgetState
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: ColorTheme.primaryColor,
+            color: isShopp != null && isShopp
+                ? Colors.green
+                : ColorTheme.primaryColor,
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(15),
               topRight: Radius.circular(20),
