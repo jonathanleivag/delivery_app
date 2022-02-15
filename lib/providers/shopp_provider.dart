@@ -126,7 +126,6 @@ class ShoppProvider extends ChangeNotifier {
       if (_shopp[data.data!.product.id] != null) {
         _shopp.remove(data.data!.product.id);
       }
-      orders.add(data.data!);
     }
     isLoading = false;
     notifyListeners();
@@ -191,6 +190,9 @@ class ShoppProvider extends ChangeNotifier {
 
     if (index != null) orders.removeAt(index);
     isLoading = false;
+    if (idProduct != null) {
+      orders.removeWhere((element) => element.product.id == idProduct);
+    }
     notifyListeners();
     return data;
   }
@@ -207,6 +209,9 @@ class ShoppProvider extends ChangeNotifier {
       final res = await http.get(url, headers: headers);
       final resJson = ShoppResponseModel.fromJson(res.body);
       _shopp[idProduct] = resJson;
+      if (resJson.success) {
+        orders.add(resJson.data!);
+      }
       notifyListeners();
     }
 

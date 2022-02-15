@@ -1,4 +1,5 @@
-import 'package:delivery_app/providers/providers.dart' show ShoppProvider;
+import 'package:delivery_app/providers/providers.dart'
+    show ProductProvider, ShoppProvider;
 import 'package:delivery_app/theme/color_theme.dart' show ColorTheme;
 import 'package:delivery_app/utils/utils.dart' show NotificationUtil;
 import 'package:flutter/material.dart'
@@ -30,6 +31,8 @@ class ClientButtonDeleteProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ShoppProvider _shoppProvider = Provider.of<ShoppProvider>(context);
+    final ProductProvider _productProvider =
+        Provider.of<ProductProvider>(context);
 
     void _onTap() {
       Alert(
@@ -48,7 +51,10 @@ class ClientButtonDeleteProductWidget extends StatelessWidget {
             ),
             onPressed: () async {
               Navigator.of(context).pop();
-              final data = await _shoppProvider.deleteProduct();
+              final data = await _shoppProvider.deleteProduct(
+                idProduct: _productProvider.selectedProduct.id,
+              );
+
               Navigator.of(context).pop();
               NotificationUtil.showSnackBar(
                 data.message!,
